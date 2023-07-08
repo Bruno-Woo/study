@@ -1,0 +1,58 @@
+<script>
+    // const & let
+
+    // let (한 번 선언하면 다시 선언할 수 없음)
+    let a = 10;
+    //let a = 20; // Uncaught SyntaxError SyntaxError: Identifier 'a' has already been declared
+
+    // const (한 번 할당한 값을 변경할 수 없음)
+    const b = 10;
+    //b = 20; // Uncaught TypeError TypeError: Assignment to constant variable.
+
+    // 단, 객체 {} 또는 배열 [] 로 선언했을 때는 객체의 속성과 배열의 요소를 변경할 수 있음
+    const c = {
+        num: 10,
+        text: 'hi'
+    }
+    console.log(c.num);
+    c.num = 20;
+    console.log(c.num);
+
+    const d = [];
+    console.log(d);
+    d.push(10);
+    console.log(d);
+
+    console.log('1##########################');
+
+    // 블록 유효범위
+    // var의 유효범위는 함수의 블록 단위로 제한됨 (함수 스코프)
+    var e = 100;
+    function print() {
+        var e = 10;
+        console.log('e : ' + e);
+    }
+    print(); // 10
+   
+    console.log('2##########################');
+
+    // for 반복문에서의 var 유효 범위
+    var f = 10;
+    for (var f = 0; f < 5; f++) {
+        console.log(f); // 0 1 2 3 4
+    }
+    console.log('f : ' + f); // 5
+
+    console.log('3##########################');
+
+    // const와 let의 블록 유효 범위
+    // let으로 선언한 변수의 유효 범위가 for 반복문 {} 블록안으로 제한
+    var g = 10;
+    for (let g = 0; g < 5; g++) {
+        console.log(g); // 0 1 2 3 4
+    }
+    console.log('g : ' + g); // 10
+ 
+    console.log('4##########################');
+ 
+</script>

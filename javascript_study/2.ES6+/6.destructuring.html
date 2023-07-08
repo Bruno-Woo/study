@@ -1,0 +1,129 @@
+<script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router@3/dist/vue-router.js"></script>
+<script>
+    // 구조 분해 문법(Destructuring)
+    // 변수 선언 형식이 아래와 같이 자유로워지는 것을 의미
+    // var { a, b, c } = obj;
+
+    var arr = [1, 2, 3, 4];
+    var obj = {
+        a: 10,
+        b: 20,
+        c: 30
+    };
+
+    var { a, b, c } = obj;
+
+    console.log(a); // 10
+    console.log(b); // 20
+    console.log(c); // 30
+
+    console.log('1 ##########################');
+
+    // 특정 객체의 값을 꺼내오는 방법
+    var josh = {
+        language: 'javascript',
+        position: 'front-end',
+        area: 'pangyo',
+        hobby: 'singing',
+        age: '102'
+    };
+
+    // var language = josh.language;
+    // var position = josh.position;
+    // var area = josh.area;
+    // var hobby = josh.hobby;
+    // var age = josh.age;
+
+    var { language, position, area, hobby, age } = josh;
+    console.log(language); // javascript
+    console.log(position); // front-end
+    console.log(area); // pangyo
+    console.log(hobby); // singing
+    console.log(age); // 102
+
+    console.log('2 ##########################');
+ 
+    // 뷰엑스에 적용하는 구조 분해 문법 1
+    // 뷰엑스의 actions 속성들은 모두 context라는 인자를 받음
+    // 그리고 context의 commit API를 반드시 호출함
+
+    // 적용 전
+    // actions: {
+    //     fetchData(context) {
+    //         context.commit('addProducts');
+    //     }
+    // }
+
+    // 적용 후
+    // actions: {
+    //     fetchData({ commit }) {
+    //         commit('addProducts');
+    //     }
+    // }
+
+    console.log('3 ##########################');
+
+    // 뷰에 적용하는 구조 분해 문법 1
+    // 해당 데이터가 현재 컴포넌트의 데이터인지, 외부에서 가져오는 메서드인지 구분이 어려워지기 때문에
+    // 프로젝트에 정해진 컨벤션에 맞춰 주의해서 사용해야 함
+
+    // export default {
+    //     props: {
+    //         id: Number,
+    //         title: String,
+    //         created: String,
+    //         author: String,
+    //     },
+    //     methods: {
+    //         savePost(postId) {
+    //         // ..
+    //         },
+    //         submitForm() {
+    //         // 구조 분해 문법 미적용
+    //         this.savePost(this.id);
+
+    //         // 구조 분해 문법 적용
+    //         const { id, savePost } = this;
+    //         savePost(id);
+    //         },
+    //     },
+    // }
+
+    console.log('4 ##########################');
+ 
+    // 뷰에 적용하는 구조 분해 문법 2
+
+    // <template>
+    //     <ul>
+    // 적용 전
+    //         <li v-for="post in posts" :key="post.id">
+    //             {{ post.title }} - {{ post.author }}
+    //         </li>
+    // 적용 후
+    //         <li v-for="{ title, author, id } in posts" :key="id">
+    //             {{ title }} - {{ author }}
+    //         </li>
+ 
+
+    //     </ul>
+    // </template>
+
+    // <script>
+    //     export default {
+    //         data() {
+    //             return {
+    //             posts: [
+    //                 { id: 1, title: "post 1", created: "2021-08-01", author: "Capt" },
+    //                 { id: 2, title: "post 2", created: "2021-08-02", author: "Capt" },
+    //                 { id: 3, title: "post 3", created: "2021-08-03", author: "Capt" },
+    //             ],
+    //             };
+    //         },
+    //     }
+    // </script>
+
+    console.log('5 ##########################');
+
+</script>
+

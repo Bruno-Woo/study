@@ -1,0 +1,72 @@
+<script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router@3/dist/vue-router.js"></script>
+<script>
+    // 향상된 객체 리터럴(Enhanced Object Literal)
+ 
+    // 기존 객체 정의 방식
+    var josh = {
+        // 속성: 값
+        language: 'javascript',
+        coding: function(){
+            console.log('Hello World');
+        }
+    };
+    console.log(josh.language); // javascript
+    josh.coding(); // Hello World
+    
+    console.log('1##########################');
+
+    // 축약 문법 1 - 속성과 값이 같으면 1개만 기입
+    // 객체를 정의할 때 속성(property)와 값(value)이 같으면 아래와 같이 축약이 가능
+    var language = 'javascript';
+
+    var josh = {
+        // language: language,
+        language
+    };
+
+    console.log(josh); // {language: "javascript"}
+
+    // #1 - 컴포넌트 등록 방식에서의 축약 문법
+    const myComponent = {
+        template: '<p>My Component</p>'
+    };
+
+    new Vue({
+        components: {
+            // myComponent: myComponent
+            myComponent
+        }
+    });
+
+    // #2 - 라우터 등록 방식에서의 축약 문법
+    const router = new VueRouter({
+        // ...
+    });
+
+    new Vue({
+        // router: router,
+    router
+    });
+ 
+    console.log('2##########################');
+
+    // 축약 문법 2 - 속성에 함수를 정의할 때 function 예약어 생략
+    // 축약 전
+    const woo = {
+        // 속성: 함수
+        coding: function() {
+            console.log('woo : Hello World');
+        }
+    };
+    woo.coding(); // woo : Hello World
+ 
+    // 축약 후
+    const woo2 = {
+        coding() {
+            console.log('woo2 : Hello World');
+        }
+    };
+    woo2.coding(); // woo2 : Hello World
+
+</script>

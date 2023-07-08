@@ -1,0 +1,150 @@
+<input type="button" value="버튼1" id="this-button1">
+<input type="button" value="버튼2" id="this-button2">
+<script>
+    // arrow function
+
+    // 기존 함수 정의 방식
+    var a = function() {
+        // ...
+    };
+ 
+    // 화살표 함수를 이용한 함수 정의 방식
+    var b = () => {
+        // ...
+    };
+ 
+    console.log('1##########################');
+
+    // 화살표 함수의 다양한 문법
+    // 1. 단순한 자바스크립트 표현식
+    () => 10 + 20; // {} 필요 없음
+
+    // 2. 함수 선언 방식
+    () => {
+        print();
+        log();
+        return 10 + 20;
+    };
+
+    // 3. 파라미터가 하나인 경우
+    // 파라미터를 1개만 선언하는 경우 소괄호 () 를 생략할 수 있음
+    const c = num => {
+        return num * 10;
+    };
+    const d = num => num * 10;
+    console.log(c(100)); // 1000
+    console.log(d(200)); // 2000
+
+    console.log('2##########################');
+
+    // this 바인딩의 변화
+    // 화살표 함수의 this는 함수를 선언할 때의 상위 스코프의 this로 바인딩 될 객체가 정해짐
+    const foo = {
+        name: "bar",
+        age: 10000,
+        printThis() {
+            console.log(this); // {name: "bar", age: 10000, printThis: ƒ}
+            const innerFunc = () => {
+                return this; // {name: "bar", age: 10000, printThis: ƒ}
+            };
+            console.log(innerFunc());
+        }
+    };
+
+    foo.printThis();
+
+    // setTimeout에서의 this
+    // 일반 함수에서 setTimeout에서의 this는 window를 가리킴
+    // 화살표 함수에서는 상위 스코프의 this로 값이 바인딩됨
+    const foo2 = {
+        name2: "bar",
+        age2: 43,
+        getThisArrowFunc: function() {
+            console.log(this);
+            setTimeout(() => {
+                console.log(this);
+            }, 1000);
+        },
+
+        getThisFunc: function() {
+            console.log(this);
+            setTimeout(function() {
+                console.log(this);
+            }, 1000)
+        }
+    };
+
+    foo2.getThisArrowFunc();
+    foo2.getThisFunc();
+
+    // 엄격모드('use strict') 일때는 바인딩 되지 않음
+    "use strict";
+    (function() {
+        setTimeout(() => {
+            console.log(this); // undefined
+        }, 1000);
+    })();
+    
+    console.log('3##########################');
+    
+    // addEventListener에서의 this
+    // addEventListener 두 번째 인자로 화살표 함수를 넣으면 this는 상위 스코프의 this를 가리킴
+    const button1 = document.getElementById("this-button1");
+    button1.innerText = "함수 호출 버튼1";
+
+    button1.addEventListener("click", () => {
+        console.log("###addEventListener 1 ###");
+        console.log(this === window); // true
+        console.log(this.innerText); // undefined
+    });
+
+    const button2 = document.getElementById("this-button2");
+    button2.innerText = "함수 호출 버튼2";
+
+    button2.addEventListener("click", function() {
+        console.log("###addEventListener 2 ###");
+        console.log(this === button2); // true
+        console.log(this.innerText); // 함수 호출 버튼1
+    });
+
+    // addEventListener 콜백 함수 안에서 사용되는 this는 class로 생성된 객체 인스턴스를 가리킴
+    class Goo {
+        constructor() {
+            this.name = "bar";
+        }
+    
+        register(){
+            window.addEventListener("keydown", e => this.someMethod(e));
+        }
+
+        someMethod(event){
+            console.log(this.name); // bar
+            console.log(event.keycode); // 엔터 키를 누르면 63
+        }
+    }   
+
+    const baz = new Goo();
+    baz.register();
+ 
+    console.log('4##########################');
+
+    // call, bind, apply로 바인딩 변경 불가
+    // 일반 함수의 this와 다르게 화살표 함수에서의 this는 call, bind, apply 메소드로
+    // this에 바인딩 된 값을 변경할 수 없음
+
+    this.hoo = "bar";
+    const normalFunc = function() {
+    return this.hoo;
+    };
+    const arrowFunc = () => this.hoo;
+
+    console.log(normalFunc.call({ hoo: "baz" })); // baz
+    console.log(arrowFunc.call({ hoo: "baz" })); // bar
+
+    console.log('5##########################');
+ 
+    // 생성자 함수로 사용 불가
+    const Joo = () => {};
+    const joo = new Joo(); // Uncaught TypeError: Foo is not a constructor
+
+</script>

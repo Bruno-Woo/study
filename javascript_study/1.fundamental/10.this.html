@@ -1,0 +1,58 @@
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    // this
+    // this는 함수의 실행 컨텍스트를 가리키는 예약어
+    // 다른 언어와 다르게 자바스크립트의 this는 상황에 따라 다른 값들을 가리킴
+
+    // 첫 번째 this
+    // this의 가장 기본적인 컨텍스트 - 글로벌(전역) 컨텍스트
+    console.log(this); // 자바스크립트 최상위 객체
+
+    console.log('1##########################');
+
+    // 두 번째 this
+    // 객체 속성 함수 안에서는 해당 객체를 가리킴
+    var obj = {
+        num: 10,
+        printNum: function() {
+            console.log(this.num);
+        }
+    };
+
+    obj.printNum();
+
+    console.log('2##########################');
+
+    // 세 번째 this
+    // 함수 선언문
+    function showComment() {
+        console.log(this);
+    }
+    showComment(); // window
+
+    // 생성자 함수
+    function Developer() {
+      console.log(this);
+    }
+    var dev = new Developer();
+    Developer()
+
+    console.log('3##########################');
+
+    // 네 번째 this
+    // 비동기 처리 코드의 콜백 함수는 전역 컨텍스트를 가리킴
+    function fetchData() {
+        axios.get('https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json').then(function() {
+        console.log(this);
+        });
+    }
+
+    fetchData(); // window
+
+    console.log('4##########################');
+    console.log('5##########################');
+    console.log('6##########################');
+    console.log('7##########################');
+    console.log('8##########################');
+
+</script>

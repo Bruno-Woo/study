@@ -1,0 +1,78 @@
+<script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router@3/dist/vue-router.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+    // 기본값 매개변수(Default parameter)
+    // 기본값 매개변수란 함수의 매개변수에 값이 전달되지 않았을 때
+    // 기본 값으로 설정하는 문법
+
+    // 구문
+
+    // function functionName(param1 = defaultValue1, ..., paramN = defaultValueN) {
+    //     // ... 
+    // }
+
+    function foo(param1 = 1, param2 = {}, param3 = 'korean') {
+        console.log(param1, param2, param3);
+    };
+
+    foo(30, { name: 'amy' }, 'american'); // 30, { name: 'amy' }, 'american'
+    foo(); // 1, {}, 'korean'
+ 
+    console.log('1 ##########################');
+    
+    // 설명
+    // ES6 이전 문법에서는 or 연산자인 ||를 이용하여 입력받은 파라미터를
+    // 지역변수에 재정의하는 방식을 사용함
+   
+    // || 를 이용한 기본값 할당 방식
+    function printPersonInfo(height, weight, age) {
+        var height = height || 180;
+        var weight = weight || 60;
+        var age = age || 66;
+
+        console.log(height, weight, age);
+    };
+
+    printPersonInfo(10, 200, 300); // 10, 200, 300
+    printPersonInfo(); // 180, 100, 66
+ 
+    // 기본값 매개변수 사용 방식
+    function printPersonInfo(height = 180, weight = 60, age = 66) {
+        console.log(height, weight, age);
+    };
+
+    printPersonInfo(178, 58, 29); // 178, 58, 29
+    printPersonInfo(100); // 100, 60, 66
+
+    console.log('2 ##########################');
+
+    // 주의사항
+    // ES6의 기본값 매개변수는 파라미터가 정의되지 않고
+    // undefined 값인 경우에만 기본 값을 할당함
+
+    // || 를 이용한 기본값 방식
+    function printFruit1(name, weight, price) {
+        var name = name || 'apple';
+        var weight = weight || 10;
+        var price = price || 15000;
+
+        console.log(name, weight, price);
+    };
+
+    printFruit1(0, false, null); // apple, 10, 15000
+
+    // 기본값 매개변수 사용 방식
+    function printFruit2(name = 'apple', weight = 10, price = 15000) {
+        console.log(name, weight, price);
+    };
+
+    // 0, false, null을 값으로 인식하여 기본값 대체되지 않음
+    printFruit2(0, false, null); // 0, false, null
+    // 값이 없거나 undefined 일 때 기본값으로 대체
+    printFruit2(); // apple, 10, 15000
+
+    console.log('3 ##########################');
+
+</script>
+

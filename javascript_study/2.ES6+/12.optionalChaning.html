@@ -1,0 +1,78 @@
+<script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router@3/dist/vue-router.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+    // Optional Chaning(?.)
+    // 
+
+    // 옵셔널 체이닝이 추가되기 전
+    const userInfo1 = {
+        name: {
+            first: 'Hong',
+            last: 'Gildong',
+        },
+        address: {
+            city: 'Seoul',
+            postcode: '04377',
+        },
+    };
+
+    const postcode1 = userInfo1.address && userInfo1.address.postcode;
+    console.log(postcode1);
+ 
+    // && 연산자를 사용해서 userInfo 에 address 속성이 있는지 확인을 하고
+    // postcode 에 접근하고 있음
+
+    console.log('1 ##########################');
+    
+    // 옵셔널 체이닝이 추가 된 후
+
+    const postcode2 = userInfo1.address?.postcode;
+    console.log(postcode2);
+
+    console.log('2 ##########################');
+    
+    const userInfo2 = {
+        name: {
+            first: 'Hong',
+            last: 'Gildong',
+        },
+        address: {
+            city: 'Seoul',
+            postcode: '04377',
+        },
+        getInfo: () => userInfo2,
+    };
+    
+    // 메소드의 존재 여부 확인하고 호출할 때도 사용 가능
+    console.log(userInfo2.getInfo?.());
+    // userInfo object
+    
+    console.log(userInfo2.setInfo?.());
+    // undefined
+    
+
+    // . 대신 대괄호 [] 를 사용해 객체의 속성에 접근하는 경우에도
+    // 옵셔널 체이닝을 사용할 수 있음
+    const key = 'city';  
+    console.log(userInfo2.address?.[key]);
+
+    console.log('3 ##########################');
+
+    // 널 병합 연산자(??)와 같이 활용하기
+    // 옵셔널 체이닝과 널 병합 연산자(??)를 사용하여
+    // 특정 속성의 값의 유무를 판별하고 기본 값을 정의할 수 있음
+
+    const city = userInfo2.address?.city ?? 'New York';
+    console.log(city);
+
+    // 옵셔널 체이닝(?.)은 존재하지 않아도 괜찮은 대상에만 사용해야 함
+    // 위 예제 코드에서 userInfo는 반드시 존재해야 하지만
+    // address는 필수값이 아님
+    // userInfo.address?.city --> 바람직함
+    // userInfo?.address?.city --> 바람직하지 않음
+
+    console.log('4 ##########################');
+
+</script>
+
